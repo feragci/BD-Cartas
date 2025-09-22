@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../public/css.css">
+  <title>FormularioCartas</title>
+</head>
+<body>
+<form id="formulario">
+  <label>ID Carta:</label><br>
+  <input type="number" name="id_carta" required><br>
+
+  <label>Nombre:</label><br>
+  <input type="text" name="nombre" required><br>
+
+  <label>Tipo:</label><br>
+  <input type="text" name="tipo"><br>
+
+  <label>Sub tipo:</label><br>
+  <input type="text" name="sub_tipo"><br>
+
+  <label>Rareza:</label><br>
+  <input type="text" name="rareza"><br>
+
+  <label>Expansión:</label><br>
+  <input type="text" name="expansion_poke"><br><br>
+
+  <button type="submit">Guardar carta</button>
+</form>
+
+<script>
+document.getElementById("formulario").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  
+  const datos = {
+    id_carta: parseInt(this.id_carta.value),
+    nombre: this.nombre.value,
+    tipo: this.tipo.value,
+    sub_tipo: this.sub_tipo.value,
+    rareza: this.rareza.value,
+    expansion_poke: this.expansion_poke.value
+  };
+
+  const res = await fetch("http://localhost:3000/api/cartas", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(datos)
+  });
+
+  const msg = await res.text();
+  alert(msg);
+});
+</script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('https://images7.alphacoders.com/592/592678.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Rubik', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    #formulario {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 50px 60px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      width: 500px;
+      text-align: left;
+      backdrop-filter: blur(3px);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 16px;
+      color: #686868; /* Amarillo Pikachu */
+      text-shadow: 2px 2px #000000; /* Azul Pokémon */
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #2A75BB;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px 10px;
+      margin-bottom: 15px;
+      border: 2px solid #1cb7ff;
+      border-radius: 10px;
+      font-family: 'Rubik', sans-serif;
+      font-size: 14px;
+    }
+
+    input:focus {
+      border-color: #2A75BB;
+      outline: none;
+      background-color: #f7f7f7;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #1b1d96; /* Rojo Pokéball */
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 10px;
+      letter-spacing: 1px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0014c3;
+    }
+  </style>
+
+
+</body>
+</html>
+
+
